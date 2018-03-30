@@ -1,6 +1,6 @@
 <!-- 过车查询 -->
 <template>
-  <div id="all">
+  <div id="outland">
     <Form :model="formCarQuery" label-position="right" :label-width="80" inline>
       <Row>
         <Col span="7">
@@ -29,7 +29,7 @@
         <Col span="5" v-if="!showCondition">
           <FormItem label="选择卡口：" >
               <Poptip placement="left" width="400">
-                <Button type="success" shape="circle" icon="android-pin">{{xzkkLabel}}</Button>
+                <Button type="primary" icon="android-pin">{{xzkkLabel}}</Button>
                 <div slot="content">
                   <Tree ref="xzkkTree" :data="xzkkTree" multiple show-checkbox @on-check-change="xzkkChecked"></Tree>
                 </div>
@@ -63,16 +63,14 @@
 
         <Col span="5">
           <FormItem>
-            <Button type="primary" shape="circle" icon="ios-search" @click="formCarQuerySubmit">查询</Button> 
-            <Tooltip content="重置条件" placement="top">
-                <Button type="ghost" shape="circle" icon="ios-loop-strong" style="margin-left: 4px" @click="formCarQueryReset">
+            <Button type="primary" @click="formCarQuerySubmit">查询</Button> 
+            <Button type="ghost" style="margin-left: 4px" @click="formCarQueryReset">重置
                 </Button>
-            </Tooltip>
             <Tooltip content="更多条件" placement="top">
-                <Button type="ghost" shape="circle" icon="ios-arrow-down" style="margin-left: 4px" @click="openCondition" v-show="showCondition"></Button>
+                <Button type="ghost" icon="ios-arrow-down" style="margin-left: 4px" @click="openCondition" v-show="showCondition"></Button>
             </Tooltip> 
             <Tooltip content="收起" placement="top">
-                <Button type="primary" shape="circle" icon="ios-arrow-up" style="margin-left: 4px" @click="closeCondition" v-show="!showCondition"></Button>
+                <Button type="primary" icon="ios-arrow-up" style="margin-left: 4px" @click="closeCondition" v-show="!showCondition"></Button>
             </Tooltip>
           </FormItem>
         </Col>
@@ -166,7 +164,7 @@
 
 <script>
 export default {
-  name: 'all',
+  name: 'outland',
   created(){
         this.tgsj=[];
         const end=new Date();

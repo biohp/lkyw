@@ -2,7 +2,7 @@
 <template>
   <div id="attendance">
   	<Poptip v-model="agency.visible" placement="bottom-start" width="300">
-  		<Button type="primary" shape="circle" icon="flag">{{ agency.label }}</Button>
+  		<Button type="primary" icon="flag">{{ agency.label }}</Button>
 	    <div slot="content">
 	      <div style="float:right">
 	        <Button type="primary" shape="circle" size="small" @click="queryWork">确定</Button>
@@ -32,8 +32,8 @@
 	        </TabPane>
 	        <TabPane label="执勤记录" icon="search">
 	        	<div class="input-first">
-			        <DatePicker format="yyyy/MM/dd HH:mm:ss" type="datetimerange" placeholder="选择时间段" style="width: 300px" v-model="form.date"></DatePicker> 
-			        <Button style="margin-left:10px" type="primary" shape="circle" icon="search" @click="queryRecord">查询</Button>
+			        <DatePicker type="datetimerange" placeholder="选择时间段" style="width: 300px" v-model="form.date"></DatePicker> 
+			        <Button type="primary" @click="queryRecord">查询</Button>
 			    </div>
 	        	<Table :stripe="true" border :columns="columnsRecord" :data="dataRecord"></Table>
 		        <div class="card-box-page" v-if="dataRecord.length===0?false:true">
@@ -65,7 +65,7 @@
 		    </Card>
         </div> 
         <div slot="footer" style="text-align:center">
-            <Button type="primary" shape="circle" @click="startAttendance">开始检查</Button>
+            <Button type="primary" @click="startAttendance">开始检查</Button>
         </div>
     </Modal>
     <Modal v-model="modal.visible.end" width="360" :mask-closable="false">
@@ -93,6 +93,7 @@ export default {
     		agency: '',
     		date: []
     	},
+    	//机构
     	agency: {
     		visible: false,
     		label: '请选择所在机构',
@@ -145,12 +146,14 @@ export default {
     	  },
     	  title: ''
     	},
+    	//检查点执勤对象
     	work: {
     		check: '',
     		name: '',
     		status: '',
     		img: ''
     	},
+    	//执勤表
         columnsWork: [
 	        {
 	            title: '检查点名称',
@@ -242,6 +245,7 @@ export default {
 	            img: 'http://pic1.16pic.com/00/07/66/16pic_766152_b.jpg'
 	        }
 	    ],
+	    //记录表
 	    columnsRecord: [
 	        {
 	            title: '检查点名称',
@@ -320,22 +324,21 @@ export default {
   methods: {
   	queryWork() {
   		this.agency.visible = false;
-  		console.log(this.$refs.agencyTree.getSelectedNodes());
-  		//axios
+  		//axios(this.form.agency)
   	},
   	queryRecord() {
   		//axios
-  		
         this.form.date = formatDate(this.form.date);
         console.log(this.form.date);
-
   	},
   	agencySelect() {
   		let select = this.$refs.agencyTree.getSelectedNodes();
   		if (select.length !== 0) {
   			this.agency.label = select[0].title;
+  			this.form.agency = select[0].value;
   		} else {
   			this.agency.label = '请选择所在机构';
+  			this.form.agency = '';
   		}
   	},
   	modalStart(index) {
@@ -344,7 +347,7 @@ export default {
   		this.modal.visible.start = true;
   	},
   	modalEnd(index) {
-  		this.modal.title = '检查点数据信息';
+  		this.modal.title = this.dataWork[index].check;
   		this.modal.visible.end = true;
   	},
   	modalCloseStart() {

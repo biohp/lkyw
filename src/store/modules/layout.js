@@ -1,4 +1,4 @@
-import { getSubmenu, getBreadcrumb } from '../../utils/layout.js'
+import { getSubmenu, getBreadcrumb } from '../../utils/component.js'
 import { INIT_LAYOUT } from '../type.js'
 
 const state = {

@@ -5,8 +5,12 @@ export const submenu = [
       value: '过车数据查询',
       children: [
           {
-              name: 'all',
-              value: '过车查询',
+              name: 'local',
+              value: '本省过车查询',
+              hasClass: false
+          },{
+              name: 'outland',
+              value: '外省过车查询',
               hasClass: false
           },{
               name: 'unlawful',
@@ -26,6 +30,14 @@ export const submenu = [
           },{
               name: 'bayonet',
               value: '卡口管理',
+              hasClass: false
+          },{
+              name: 'led',
+              value: 'LED管理',
+              hasClass: false
+          },{
+              name: 'interface',
+              value: '接口管理',
               hasClass: false
           },{
               name: 'checkpoint',

@@ -2,10 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from './layouts/Layout.vue'
 import Login from './views/Login/Login.vue'
-import All from './views/Vehicle/All'
+import Local from './views/Vehicle/Local'
+import Outland from './views/Vehicle/Outland'
 import Unlawful from './views/Vehicle/Unlawful'
 import Attendance from './views/Basic/Attendance'
 import Bayonet from './views/Basic/Bayonet'
+import LED from './views/Basic/LED'
+import Interface from './views/Basic/Interface'
 import Checkpoint from './views/Basic/Checkpoint'
 import Camera from './views/Basic/Camera'
 import User from './views/Authorization/User'
@@ -29,8 +32,11 @@ export default new Router({
 	  		component: Layout,
 	  		children: [
 	  			{
-	  				path: 'all',
-	  				component: All
+	  				path: 'local',
+	  				component: Local
+	  			},{
+	  				path: 'outland',
+	  				component: Outland
 	  			},{
 	  				path: 'unlawful',
 	  				component: Unlawful
@@ -40,6 +46,12 @@ export default new Router({
 	  			},{
 	  				path: 'bayonet',
 	  				component: Bayonet
+	  			},{
+	  				path: 'led',
+	  				component: LED
+	  			},{
+	  				path: 'interface',
+	  				component: Interface
 	  			},{
 	  				path: 'checkpoint',
 	  				component: Checkpoint

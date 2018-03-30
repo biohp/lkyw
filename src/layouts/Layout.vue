@@ -12,8 +12,8 @@
           <Dropdown @on-click="dropdownSelect">
             <Avatar class="avatar" icon="person" size="large"/>
             <DropdownMenu slot="list" :style="{textAlign: 'center'}" >
-	          <DropdownItem name="修改密码">修改密码</DropdownItem>
-	          <DropdownItem name="退出">退出</DropdownItem>  
+  	          <DropdownItem name="修改密码">修改密码</DropdownItem>
+  	          <DropdownItem name="退出">退出</DropdownItem>  
             </DropdownMenu>
           </Dropdown>
     	</div>
@@ -80,9 +80,9 @@ export default {
   	},
   	activeSelect(name){
       let open = '';
-      if (['all','unlawful'].includes(name)) {
+      if (['local','outland','unlawful'].includes(name)) {
         open = 'vehicle'; 
-      } else if (['attendance','bayonet','checkpoint','camera'].includes(name)) {
+      } else if (['attendance','bayonet','led','interface','checkpoint','camera'].includes(name)) {
         open = 'basic'; 
       } else if (['user','role','authority'].includes(name)) {
         open = 'authorization'; 
