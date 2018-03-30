@@ -1,12 +1,13 @@
+<!-- 系统参数配置 -->
 <template>
-  <div id="app">
-    <router-view></router-view>
+  <div id="parameter">
+    parameter
   </div>
 </template>
 
 <script>
 export default {
-  name: 'app',
+  name: 'parameter',
   data () {
     return {
       
@@ -15,5 +16,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
 </style>

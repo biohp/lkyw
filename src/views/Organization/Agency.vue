@@ -1,12 +1,13 @@
+<!-- 机构管理 -->
 <template>
-  <div id="app">
-    <router-view></router-view>
+  <div id="agency">
+    agency
   </div>
 </template>
 
 <script>
 export default {
-  name: 'app',
+  name: 'agency',
   data () {
     return {
       
@@ -15,5 +16,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
 </style>

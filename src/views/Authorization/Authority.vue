@@ -1,12 +1,13 @@
+<!-- 权限管理 -->
 <template>
-  <div id="app">
-    <router-view></router-view>
+  <div id="authority">
+    authority
   </div>
 </template>
 
 <script>
 export default {
-  name: 'app',
+  name: 'authority',
   data () {
     return {
       
@@ -15,5 +16,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
 </style>

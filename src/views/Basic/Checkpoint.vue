@@ -1,12 +1,13 @@
+<!-- 检查点管理 -->
 <template>
-  <div id="app">
-    <router-view></router-view>
+  <div id="checkpoint">
+    checkpoint
   </div>
 </template>
 
 <script>
 export default {
-  name: 'app',
+  name: 'checkpoint',
   data () {
     return {
       
@@ -15,5 +16,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
 </style>

@@ -1,12 +1,13 @@
+<!-- 卡口管理 -->
 <template>
-  <div id="app">
-    <router-view></router-view>
+  <div id="bayonet">
+    bayonet
   </div>
 </template>
 
 <script>
 export default {
-  name: 'app',
+  name: 'bayonet',
   data () {
     return {
       
@@ -15,5 +16,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
 </style>

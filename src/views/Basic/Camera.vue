@@ -1,12 +1,13 @@
+<!-- 摄像头管理 -->
 <template>
-  <div id="app">
-    <router-view></router-view>
+  <div id="camera">
+    camera
   </div>
 </template>
 
 <script>
 export default {
-  name: 'app',
+  name: 'camera',
   data () {
     return {
       
@@ -15,5 +16,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
 </style>

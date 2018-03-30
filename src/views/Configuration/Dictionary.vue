@@ -1,12 +1,13 @@
+<!-- 数据字典配置 -->
 <template>
-  <div id="app">
-    <router-view></router-view>
+  <div id="dictionary">
+    dictionary
   </div>
 </template>
 
 <script>
 export default {
-  name: 'app',
+  name: 'dictionary',
   data () {
     return {
       
@@ -15,5 +16,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
 </style>
