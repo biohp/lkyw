@@ -1,6 +1,6 @@
 <template>
   <div id="403">
-    
+    403
   </div>
 </template>
 

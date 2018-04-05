@@ -1,3 +1,4 @@
+<!-- 基础布局 [1.2] -->
 <template>
   <div id="layout">
     <Layout>
@@ -6,17 +7,17 @@
           <Row align="middle" class="code-row-bg">
 		        <Col span="2"><img class="header-title-img" src="../assets/jh.png"></Col>
 		        <Col span="10"><span class="header-title-span">两客一危管控平台</span></Col>
-		  </Row>
+		      </Row>
         </div>
         <div class="header-portrait">
           <Dropdown @on-click="dropdownSelect">
             <Avatar class="avatar" icon="person" size="large"/>
-            <DropdownMenu slot="list" :style="{textAlign: 'center'}" >
+            <DropdownMenu slot="list" :style="{ textAlign: 'center' }" >
   	          <DropdownItem name="修改密码">修改密码</DropdownItem>
   	          <DropdownItem name="退出">退出</DropdownItem>  
             </DropdownMenu>
           </Dropdown>
-    	</div>
+    	  </div>
       </Header>
       <Layout class="body">
         <Sider hide-trigger class="body-sider">
@@ -46,16 +47,76 @@
         </Layout>
       </Layout>
     </Layout>
+    <Modal v-model="visible.save" :width="400" :mask-closable="false" @on-cancel="modalCloseSave('formSave')">
+      <p slot="header">
+        <Icon type="locked"></Icon>
+        <span>&nbsp;修改密码</span>
+      </p>
+      <div>
+        <Form ref="formSave" :model="form.save" label-position="right" :label-width="90">
+          <Card class="card" dis-hover>
+            <FormItem label="旧密码：" prop="old">
+              <Row>
+                <Col span="22">
+                  <Input type="password" v-model.trim="form.save.old" placeholder="输入旧密码"></Input>
+                </Col>
+                <Col span="2" style="text-align: center">
+                  <Icon v-if="visible.old===1?true:false" type="checkmark-circled" color="#52c41a"></Icon>
+                  <Icon v-if="visible.old===2?true:false" type="close-circled" color="#f5222d"></Icon>
+                </Col>
+              </Row>
+            </FormItem>
+            <FormItem label="新密码：" prop="new">
+              <Row>
+                <Col span="22">
+                  <Input v-model.trim="form.save.new" type="password" placeholder="输入新密码,6-12位数字字母组合"></Input>
+                </Col>
+                <Col span="2" style="text-align: center">
+                  <Icon v-if="visible.new===1?true:false" type="checkmark-circled" color="#52c41a"></Icon>
+                  <Icon v-if="visible.new===2?true:false" type="close-circled" color="#f5222d"></Icon>
+                </Col>
+              </Row>
+            </FormItem>
+            <FormItem label="确认新密码：" prop="verify">
+              <Row>
+                <Col span="22">
+                  <Input type="password" v-model.trim="form.save.verify" placeholder="确认新密码"></Input>
+                </Col>
+                <Col span="2" style="text-align: center">
+                  <Icon v-if="visible.verify===1?true:false" type="checkmark-circled" color="#52c41a"></Icon>
+                  <Icon v-if="visible.verify===2?true:false" type="close-circled" color="#f5222d"></Icon>
+                </Col>
+              </Row>
+            </FormItem>
+          </Card>
+        </Form>
+      </div>
+      <div slot="footer">
+        <Button type="primary" @click="save('formSave')">保存</Button>
+      </div>
+    </Modal>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex';
 export default {
   name: 'layout',
   data () {
     return {
-      
+      form: {
+        save: {
+          old: '',
+          new: '',
+          verify: '',
+        }
+      },
+      visible: {
+        save: false,
+        old: 0,
+        new: 0,
+        verify: 0,
+      }
     }
   },
   computed: {
@@ -66,7 +127,6 @@ export default {
     ])
   },
   created() {
-  	//axios
   	let arr = this.$router.history.current.path.split("/");
   	this.$store.dispatch('initLayout', {open: arr[1], active: arr[2]});
   },
@@ -75,7 +135,7 @@ export default {
   	  if("退出" === name){
         this.$router.push({ path: '/login' });
       } else if ("修改密码" === name) {
-      	console.log(name);
+      	this.visible.save = true;
       }
   	},
   	activeSelect(name){
@@ -91,9 +151,18 @@ export default {
       } else if (['dictionary','parameter'].includes(name)) {
         open = 'configuration'; 
       }
-      this.$router.push({path: `/${open}/${name}`});
-      this.$store.dispatch('initLayout', {open: open, active: name}); 
-  	}
+      this.$router.push({ path: `/${open}/${name}` });
+      this.$store.dispatch('initLayout', { open: open, active: name }); 
+  	},
+    modalCloseSave(name) {
+      this.$refs[name].resetFields();
+    },
+    save(name) {
+      if (this.form.save.old === '123') {
+        this.$refs[name].resetFields();
+      }
+      this.visible.save = false;
+    }
   }
 }
 </script>
@@ -147,14 +216,15 @@ export default {
 }
 .body-layout {
   margin-left: 200px; 
-  padding: 0 16px 16px;
 }
 .breadcrumb {
-  margin: 12px 0;
+  margin: 12px 16px;
 }
 .body-layout-content {
   padding: 16px;
   background: #fff;  
-  /*min-height: 600px;*/	/*content高度*/
+}
+.card{
+  background: #f0f5ff;
 }
 </style>

@@ -1,11 +1,11 @@
-<!-- 过车查询 -->
+<!-- 外省过车查询 -->
 <template>
   <div id="outland">
     <Form :model="formCarQuery" label-position="right" :label-width="80" inline>
       <Row>
         <Col span="7">
           <FormItem label="时间段：">
-            <DatePicker type="datetimerange" placeholder="选择时间段" style="width: 280px" v-model="tgsj"></DatePicker>
+            <DatePicker type="datetimerange" placeholder="选择时间段" style="width: 300px" v-model="tgsj"></DatePicker>
           </FormItem>
         </Col>
         <Col span="6">
@@ -18,7 +18,7 @@
           </FormItem>
         </Col>
         
-        <Col span="6">
+        <Col span="5">
           <FormItem label="车辆类型：">
               <Select v-model="formCarQuery.hpzl" clearable style="width:200px">
                   <Option v-for="(item, key) in cllxList" :value="item.DM" :key="key">{{ item.DMSM }}</Option>
@@ -26,7 +26,7 @@
           </FormItem>
         </Col>
         
-        <Col span="5" v-if="!showCondition">
+        <Col span="5" offset="1" v-if="!showCondition">
           <FormItem label="选择卡口：" >
               <Poptip placement="left" width="400">
                 <Button type="primary" icon="android-pin">{{xzkkLabel}}</Button>
@@ -52,31 +52,27 @@
           </FormItem>
         </Col>
 
-        <Col span="5" v-if="!showCondition">
+        <Col span="9" v-if="!showCondition">
           <FormItem label="车行方向：">
               <CheckboxGroup v-model="formCarQuery.cxfx">
-                  <Checkbox label="1">&nbsp;上行</Checkbox>&nbsp;
-                  <Checkbox label="2">&nbsp;下行</Checkbox>&nbsp;
+                  <Checkbox label="1">&nbsp;由东向西</Checkbox>&nbsp;
+                  <Checkbox label="2">&nbsp;由西向东</Checkbox>&nbsp;
+                  <Checkbox label="3">&nbsp;由南向北</Checkbox>&nbsp;
+                  <Checkbox label="4">&nbsp;由北向南</Checkbox>&nbsp;
               </CheckboxGroup>
           </FormItem>
         </Col>
-
-        <Col span="5">
+        <Col span="6">
           <FormItem>
             <Button type="primary" @click="formCarQuerySubmit">查询</Button> 
-            <Button type="ghost" style="margin-left: 4px" @click="formCarQueryReset">重置
-                </Button>
-            <Tooltip content="更多条件" placement="top">
-                <Button type="ghost" icon="ios-arrow-down" style="margin-left: 4px" @click="openCondition" v-show="showCondition"></Button>
-            </Tooltip> 
-            <Tooltip content="收起" placement="top">
-                <Button type="primary" icon="ios-arrow-up" style="margin-left: 4px" @click="closeCondition" v-show="!showCondition"></Button>
-            </Tooltip>
+            <Button type="ghost" @click="formCarQueryReset">重置</Button>
+            <Button type="text" @click="openCondition" v-show="showCondition">展开&nbsp;&nbsp;<Icon type="ios-arrow-down"></Icon></Button>
+            <Button type="text" @click="closeCondition" v-show="!showCondition">收起&nbsp;&nbsp;<Icon type="ios-arrow-up"></Icon></Button>
           </FormItem>
         </Col>
       </Row>   
-	</Form>
-    <Card :bordered="false" style="background:#e8e8e8">
+  </Form>
+    <Card :bordered="false" style="background:#f0f5ff">
         <Tabs>
             <TabPane label="数据列表" icon="navicon-round">
                 <Table :border="true" stripe :columns="columnsCarQuery" :data="carQueryResult" size="small"></Table>
@@ -122,41 +118,41 @@
             <span>&nbsp;车辆信息详情</span>
         </p>
         <Row :gutter="16">
-	        <Col span="19">
-	        	<Card style="width:100%" :padding="0" :bordered="false">
-	                <img :src="modalCarData.TPLJ1" style="width:100%;height:500px;">
-	          </Card>
-	        </Col>
-	        <Col span="5">
-	            <Card style="width:100%;background:#e8e8e8" :padding="10" >
+          <Col span="19">
+            <Card style="width:100%" :padding="0" :bordered="false">
+                  <img :src="modalCarData.TPLJ1" style="width:100%;height:500px;">
+            </Card>
+          </Col>
+          <Col span="5">
+              <Card style="width:100%;background:#f0f5ff" :padding="10" >
                     <p slot="title" >基础信息</p>
                     <div slot="extra" style="margin-top:-2px">
                         <ButtonGroup shape="circle" size="small">
-    				        <Button type="primary" @click="prevModalCarData">
-    				            <Icon type="chevron-left"></Icon>
-    				            上一条
-    				        </Button>
-    				        <Button type="primary" @click="nextModalCarData">
-    				            下一条
-    				            <Icon type="chevron-right"></Icon>
-    				        </Button>
-    				    </ButtonGroup>
+                    <Button type="primary" @click="prevModalCarData">
+                        <Icon type="chevron-left"></Icon>
+                        上一条
+                    </Button>
+                    <Button type="primary" @click="nextModalCarData">
+                        下一条
+                        <Icon type="chevron-right"></Icon>
+                    </Button>
+                </ButtonGroup>
                     </div>
                     <ul>
-                    	<li class="modal-li">车牌号码：&nbsp;&nbsp;<span class="modal-span">{{modalCarData.HPHM}}</span></li>
-                    	<li class="modal-li">车辆类型：&nbsp;&nbsp;<span class="modal-span">{{modalCarData.HPZL_NAME}}</span></li>
-                    	<li class="modal-li">车辆品牌：&nbsp;&nbsp;<span class="modal-span">{{modalCarData.CLPP}}</span></li>
-                    	<li class="modal-li">车身颜色：&nbsp;&nbsp;<span class="modal-span">{{modalCarData.CSYS_NAME}}</span></li>
-                    	<li class="modal-li">卡口名称：&nbsp;&nbsp;<span class="modal-span">{{modalCarData.KKMC}}</span></li>
-                    	<li class="modal-li">车行方向：&nbsp;&nbsp;<span class="modal-span">{{modalCarData.CXFX_NAME}}</span></li>
-                    	<li class="modal-li">通过时间：&nbsp;&nbsp;<span class="modal-span">{{modalCarData.TGSJ}}</span></li>
+                      <li class="modal-li">车牌号码：&nbsp;&nbsp;<span class="modal-span">{{modalCarData.HPHM}}</span></li>
+                      <li class="modal-li">车辆类型：&nbsp;&nbsp;<span class="modal-span">{{modalCarData.HPZL_NAME}}</span></li>
+                      <li class="modal-li">车辆品牌：&nbsp;&nbsp;<span class="modal-span">{{modalCarData.CLPP}}</span></li>
+                      <li class="modal-li">车身颜色：&nbsp;&nbsp;<span class="modal-span">{{modalCarData.CSYS_NAME}}</span></li>
+                      <li class="modal-li">卡口名称：&nbsp;&nbsp;<span class="modal-span">{{modalCarData.KKMC}}</span></li>
+                      <li class="modal-li">车行方向：&nbsp;&nbsp;<span class="modal-span">{{modalCarData.CXFX_NAME}}</span></li>
+                      <li class="modal-li">通过时间：&nbsp;&nbsp;<span class="modal-span">{{modalCarData.TGSJ}}</span></li>
                     </ul>
                     <img :src="modalCarData.TPLJ1" style="width:100%;height:200px;">
                 </Card>
-	        </Col>
-	    </Row>
-	    <div slot="footer">
-            <Button type="success" shape="circle" icon="arrow-down-a" @click="downCarDataImg">下载图片</Button>
+          </Col>
+      </Row>
+      <div slot="footer">
+            <Button type="primary" icon="arrow-down-a" @click="downCarDataImg">下载图片</Button>
         </div>
     </Modal>
   </div>
@@ -205,7 +201,7 @@ export default {
             this.xzkkLabel=`已选择${this.formCarQuery.kkisd.length}个卡口`;
         } 
     },
-  	/*提交表单*/
+    /*提交表单*/
     formCarQuerySubmit(){
         this.formCarQuery.hphm=this.cpdq+this.cphm;
         this.formCarQuery.tgsj=[];
@@ -255,29 +251,29 @@ export default {
     },
     /*记录详情*/
     show (index) {
-    	this.modalCarDataIndex=index
-    	this.modalCarQuery = true
-    	this.modalCarData = this.carQueryResult[this.modalCarDataIndex]
+      this.modalCarDataIndex=index
+      this.modalCarQuery = true
+      this.modalCarData = this.carQueryResult[this.modalCarDataIndex]
     },
     cancel () {
         this.$Message.info('详情页面已关闭');
     },
     prevModalCarData(){
-    	if(this.modalCarDataIndex===0){
-    		this.$Message.info('没有上一个了！');
-    	}else {
-    		this.modalCarDataIndex--
-    		this.modalCarData = this.carQueryResult[this.modalCarDataIndex]
-    	}
-    	
+      if(this.modalCarDataIndex===0){
+        this.$Message.info('没有上一个了！');
+      }else {
+        this.modalCarDataIndex--
+        this.modalCarData = this.carQueryResult[this.modalCarDataIndex]
+      }
+      
     },
     nextModalCarData(){
-    	if(this.modalCarDataIndex===this.carQueryResult.length-1){
-    		this.$Message.info('没有下一个了！');
-    	}else {
-    		this.modalCarDataIndex++
-    		this.modalCarData = this.carQueryResult[this.modalCarDataIndex]
-    	}
+      if(this.modalCarDataIndex===this.carQueryResult.length-1){
+        this.$Message.info('没有下一个了！');
+      }else {
+        this.modalCarDataIndex++
+        this.modalCarData = this.carQueryResult[this.modalCarDataIndex]
+      }
     },
     downCarDataImg(){
 
@@ -300,22 +296,22 @@ export default {
   },
   data () {
     return {
-    	modalCarDataIndex:Number,
-    	modalCarData:{
-      	CDBH:'',
-  			CLPP:'',
-  			CSYS_NAME:'',
-  			CXFX_NAME:'',
-  			HPHM:'',
-  			HPZL_NAME:'',
-  			KKMC:'',
-  			TGSJ:'',
-  			TPLJ1:'',
-  			XSSD:Number
-    	},
-    	modalCarQuery: false,
+      modalCarDataIndex:Number,
+      modalCarData:{
+        CDBH:'',
+        CLPP:'',
+        CSYS_NAME:'',
+        CXFX_NAME:'',
+        HPHM:'',
+        HPZL_NAME:'',
+        KKMC:'',
+        TGSJ:'',
+        TPLJ1:'',
+        XSSD:Number
+      },
+      modalCarQuery: false,
       total:90,
-    	formCarQuery: {
+      formCarQuery: {
           hphm: '',
           tgsj: [],
           hpzl: '',
@@ -348,9 +344,9 @@ export default {
             DM: '2',
             DMSM: '大型汽车'
         },
-	    ],
+      ],
       xzkkLabel:'选择卡口',
-	    xzkkTree: [
+      xzkkTree: [
           {
               title: 'parent 1',
               value:'一级',
@@ -378,17 +374,17 @@ export default {
           }
       ],
       showCondition:true,
-	    columnsCarQuery: [
+      columnsCarQuery: [
             {title: '通过时间',key: 'TGSJ',width: 170,align: 'center'},//TGSJ
-            {title: '卡口名称',key: 'KKMC',width: 274,align: 'center'},//KKMC
-            {title: '车牌',key: 'HPHM',width: 100,align: 'center'},//HPHM
-            {title: '车辆类型',key: 'HPZL_NAME',width: 100,align: 'center'},//HPZL_NAME
-            {title: '车行方向',key: 'CXFX_NAME',width: 100,align: 'center'},//CXFX_NAME
-            {title: '车道号',key: 'CDBH',width: 80,align: 'center'},//CDBH
+            {title: '卡口名称',key: 'KKMC',width: 300,align: 'center'},//KKMC
+            {title: '车牌',key: 'HPHM',width: 130,align: 'center'},//HPHM
+            {title: '车辆类型',key: 'HPZL_NAME',width: 140,align: 'center'},//HPZL_NAME
+            {title: '车行方向',key: 'CXFX_NAME',width: 90,align: 'center'},//CXFX_NAME
+            {title: '车道号',key: 'CDBH',width: 75,align: 'center'},//CDBH
             {
-            	title: '行驶速度(km/h)',
+              title: '行驶速度(km/h)',
                 key: 'XSSD',//XSSD
-                width: 150,
+                width: 125,
                 align: 'center',
                 render: (h, params) => {
                     const row = params.row;
@@ -402,33 +398,33 @@ export default {
                     }, text);
                 }
             },
-            {title: '车辆品牌',key: 'CLPP',width: 120,align: 'center'},//CLPP
-            {title: '车身颜色',key: 'CSYS_NAME',width:100,align: 'center'},//CSYS_NAME
+            {title: '车辆品牌',key: 'CLPP',width: 130,align: 'center'},//CLPP
+            {title: '车身颜色',key: 'CSYS_NAME',width:80,align: 'center'},//CSYS_NAME
             {
-	            title: '图片',
-	            key: 'TPLJ1',//TPLJ1
-	            align: 'center',
-	            render: (h, params) => {
-	                return h('div', [
-	                    h('Button', {
-	                        props: {
-	                            type: 'primary',
-	                            size: 'small',
-	                            shape:'circle',
-	                            icon:'image'
-	                        },
-	                        on: {
-	                            click: () => {
-	                                this.show(params.index);
-	                            }
-	                        }
-	                    })
-	                ]);
-	            }
+              title: '图片',
+              key: 'TPLJ1',//TPLJ1
+              align: 'center',
+              render: (h, params) => {
+                  return h('div', [
+                      h('Button', {
+                          props: {
+                              type: 'primary',
+                              size: 'small',
+                              shape:'circle',
+                              icon:'image'
+                          },
+                          on: {
+                              click: () => {
+                                  this.show(params.index);
+                              }
+                          }
+                      })
+                  ]);
+              }
             }
       ],
       carQueryResult: [
-      	{
+        {
               TGSJ: '2018-01-29 11:32:00',
               KKMC: '环长沙西收费站长张高速15公里392米',
               HPHM: '湘A79389警',
@@ -471,7 +467,7 @@ export default {
               CSYS_NAME: '黑',
               TPLJ1: 'http://pic.58pic.com/58pic/15/48/60/17y58PICUk7_1024.jpg',},{
               TGSJ: '2018-01-29 11:32:00',
-              KKMC: '环长沙西收费站长张高速15公里392米fdhdfh',
+              KKMC: '环长沙西收费站长张高速15公里392米',
               HPHM: '湘A79389警',
               HPZL_NAME: '小型汽车',
               CXFX_NAME: '由西向东',
@@ -577,13 +573,14 @@ export default {
     padding:0 5px 6px 5px;
   }
   .tab-span{
-  font-size: 5px;
+    font-size: 5px;
   }
   .modal-li{
-  padding-bottom: 10px;
-      color: #262626;
+    padding-bottom: 10px;
+    color: #262626;
+    font-weight: 700;
   }
   .modal-span{
-  color: #030852;
+    font-weight: normal;
   }
 </style>

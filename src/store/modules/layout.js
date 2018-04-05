@@ -1,6 +1,6 @@
-import { getSubmenu, getBreadcrumb } from '../../utils/component.js'
-import { INIT_LAYOUT } from '../type.js'
-
+import { getSubmenu, getBreadcrumb } from '../../utils/component.js';
+import { INIT_LAYOUT } from '../type.js';
+//基础布局数据仓库
 const state = {
   active: '',
   open: [],

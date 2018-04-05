@@ -1,1 +1,1 @@
-export const INIT_LAYOUT = "INIT_LAYOUT"
+export const INIT_LAYOUT = "INIT_LAYOUT" //初始化基础布局页面信息 
