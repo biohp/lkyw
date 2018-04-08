@@ -1,42 +1,43 @@
 <!-- 登录 [0.2]-->
 <template>
   <div id="login">
-    <img class="background" src="../../assets/bk.jpg">
-    <div class="login-head">
-      <Row type="flex" align="middle">
+    <img class="bk" src="../../assets/bk.png">
+    <div class="head">
+      <Row type="flex" justify="center" align="middle">
         <Col span="1">
-          <img class="login-head-img" src="../../assets/jh.png">
+          <img class="head-jh" src="../../assets/jh.png">
         </Col>
         <Col span="9">
-          <div class="login-head-title">湖南省高速公路交通警察局</div>
+          <img src="../../assets/jjj.png">
         </Col>
       </Row>
     </div>
-    <div class="login-title">
-      <img class="login-title-img" src="../../assets/title.png">
-    </div>
-    <div class="login-content">
-      <div class="login-box">
-        <div class="login-box-form">
+    <div class="body">
+      <div class="body-title">
+        <div class="body-title-ch">两客一危管控平台</div>
+        <div class="body-title-en">Liang Ke Yi Wei Management System</div>
+      </div>
+      <div class="body-login">
+        <div class="body-login-form">
           <Form ref="formLogin" :model="formLogin" :rules="ruleLogin" >
             <FormItem prop="user">
               <Input type="text" v-model.trim="formLogin.user" placeholder="用户名" size="large">
-                <Icon type="person" slot="prepend"></Icon>
+                <Icon type="person" slot="prepend" size="15"></Icon>
               </Input>
             </FormItem>
             <FormItem prop="password">
               <Input type="password" v-model="formLogin.password" placeholder="密码" size="large" @on-enter="login('formLogin')">
-                <Icon type="locked" slot="prepend"></Icon>
+                <Icon type="locked" slot="prepend" size="14"></Icon>
               </Input>
             </FormItem>
             <FormItem>
-              <Button type="default" @click="login('formLogin')" size="large" long>登 录</Button>
+              <Button type="primary" @click="login('formLogin')" size="large" long>登 录</Button>
             </FormItem>
           </Form>
         </div>
       </div>
     </div>
-    <div class="login-foot">Copyright © 2018 湘江智慧科技股份有限公司 400-800-2285</div>
+    <div class="foot">Copyright © 2018 湘江智慧科技股份有限公司 400-800-2285</div>
   </div>
 </template>
 
@@ -75,72 +76,66 @@ export default {
 
 <style scoped>
 #login{
-  position:fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(143deg,#2945cb 20%,#2b83f9 81%,#3a9dff); 
-}
-.background{
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 33%; 
 }
-.login-bk{
-  height: 1330px;
-  margin-left: 420px;
-}
-.login-head{
+.bk{
   position: fixed;
-  top: 2%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 37%;
+}
+.head{
+  position: fixed;
+  top: 15%;
   left: 2%;
   width: 100%;
 }
-.login-head-img{
+.head-jh{
   width: 53px;
   height: 53px;
 }
-.login-head-title{
-  width: 100%;
-  color: #f0f5ff;
-  font-size: 28px;
-  font-weight: 600;
-  font-family: "Microsoft JhengHei", "Helvetica Neue", Helvetica, "PingFang SC";
-}
-.login-title{
+.body{
   position: fixed;
-  top: 24%;
-  width: 100%;
-  text-align: center;
-}
-.login-content{
-  position: fixed;
-  top: 46%;
+  top: 37%;
   width: 100%;
   height: 100%;
+  background: #f0f5ff;
 }
-.login-box{
+.body-title{
+  width: 320px;
   margin: auto;
-  width: 500px;
-  height: 240px;
-  background: rgba(255,255,255,0);
-  border-radius: 8px;
+  margin-top: 35px;
 }
-.login-box-form{
-  width: 300px;
+.body-title-ch{
+  color: #262626;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  font-family:  "Helvetica Neue", Helvetica, "PingFang SC";
+}
+.body-title-en{
+  text-align: center;
+  font-size: 14px;
+}
+.body-login{
+}
+.body-login-form{
+  width: 310px;
   height: 250px;
   margin: 0 auto;
   padding-top: 40px;
 }
-.login-foot{
+.foot{
   position: fixed;
   top: 96%;
   width: 100%;
   text-align: center;
-  color: #d9d9d9;
+  color: #595959;
   font-size: 13px;
 } 
 </style>
